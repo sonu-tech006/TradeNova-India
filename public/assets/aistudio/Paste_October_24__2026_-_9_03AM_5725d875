@@ -1,0 +1,897 @@
+# MASTER BUILD PROMPT — TRADENOVA
+## Build a complete, modern, full-stack Indian stock market platform with AI
+
+Act as a senior full-stack engineer, fintech product designer, backend architect, database engineer, AI engineer, cybersecurity specialist, and QA engineer.
+
+Build a complete, functional, production-minded web application named **TradeNova**. It should provide the core user experience of a modern Indian stock trading and investment platform, combining a professional trading terminal, investment portfolio analytics, market research, watchlists, price alerts, and AI-powered stock analysis.
+
+This is an original product. Do not use Zerodha's name, logo, proprietary assets, or copied branding. Create an original TradeNova identity.
+
+**Most important:** Do not build only a static landing page or a nonfunctional dashboard. Implement real authentication, MongoDB persistence, backend APIs, working navigation, functional forms, stock-data integration, portfolio calculations, AI features, and error handling. Every important button must work.
+
+If a third-party credential is missing, implement the integration interface and clearly labelled demo mode. Never pretend that a mock response is real market data.
+
+---
+
+# 1. TECHNOLOGY STACK
+
+Use the following stack unless a specific dependency is incompatible with the AI Studio runtime.
+
+Frontend:
+- React with TypeScript.
+- Vite if supported by the generated project.
+- Tailwind CSS.
+- shadcn/ui or equivalent accessible UI primitives.
+- Lucide icons.
+- React Router.
+- TanStack Query for server-state fetching and caching.
+- TradingView Lightweight Charts for candlestick charts, subject to its applicable license.
+- Recharts for portfolio analytics and other dashboard charts.
+- React Hook Form and Zod for form validation.
+
+Backend:
+- Node.js server-side runtime.
+- TypeScript.
+- Express or a compatible backend router.
+- MongoDB Atlas.
+- Mongoose for MongoDB models.
+- Secure server-side session or JWT-based authentication.
+- Socket.IO or provider-supported WebSockets for live updates when the runtime supports them.
+- Gemini API for AI market explanations, research summaries, and prediction analysis.
+
+Use the existing AI Studio full-stack project structure rather than creating a second unnecessary backend. Install compatible dependencies and ensure the project runs in AI Studio's environment.
+
+All secret credentials must remain server-side.
+
+# 2. BRAND IDENTITY AND DESIGN
+
+Product name: TradeNova
+
+Tagline: "See the Market. Understand the Move."
+
+Create an original, premium fintech design with:
+- A custom geometric TradeNova logo.
+- Professional typography.
+- A clean, dense but readable trading-terminal layout.
+- Subtle transitions, hover states, skeleton loaders, and micro-interactions.
+- Responsive layouts for desktop, tablet, and mobile.
+- Accessible contrast, keyboard navigation, focus states, and semantic HTML.
+- Realistic stock-market terminology and financial number formatting.
+- Indian currency formatting using ₹ and the Asia/Kolkata timezone.
+
+Avoid excessive gradients, oversized marketing cards, random animations, or a generic AI-generated dashboard appearance. Prioritize information density, speed, clarity, and polished financial charts.
+
+## Theme and appearance settings
+
+Implement all of these:
+- Dark theme.
+- Light theme.
+- System theme.
+- A theme toggle visible on the dashboard and navigation.
+- Persistent theme preference across sessions.
+- Customizable accent color, such as emerald, blue, violet, or orange.
+- Adjustable chart colors and chart appearance.
+- A settings page where users can choose interface preferences.
+- Smooth transitions without causing chart flicker.
+
+The selected theme must actually change the application background, cards, text, borders, tables, inputs, dialogs, charts, menus, and authentication pages. Do not change only one component.
+
+Suggested visual direction:
+- Dark background: deep navy and charcoal.
+- Light background: soft neutral white and slate.
+- Positive market movement: green.
+- Negative market movement: red.
+- Accent: emerald or electric blue.
+- Use consistent spacing, typography, border radii, and shadows.
+
+# 3. PUBLIC LANDING PAGE
+
+Create a premium landing page with:
+- Original TradeNova logo and navigation.
+- Hero headline: "Your Market. Your Strategy. Smarter Decisions."
+- Short explanation of the platform.
+- CTA buttons: "Explore Markets", "Create Free Account", and "Sign In".
+- A live-market overview only when real market data is available.
+- Featured market cards for supported Indian indices.
+- Feature sections for charts, AI insights, portfolio tracking, watchlists, and alerts.
+- A platform preview using actual application components.
+- Security and data-transparency section.
+- FAQ section.
+- Footer with privacy policy, terms, risk disclosures, contact, and support links.
+
+Do not show fabricated live indices on the public landing page. When data is simulated, label it clearly as demo data.
+
+# 4. LOGIN, SIGNUP, AND AUTHENTICATION
+
+Build fully functional authentication pages.
+
+Signup fields:
+- Full name.
+- Email address.
+- Password.
+- Confirm password.
+- Optional phone number.
+- Terms and privacy consent.
+
+Login fields:
+- Email.
+- Password.
+- Remember-me option where appropriate.
+- Forgot password.
+- Show/hide password.
+- Clear validation and error messages.
+
+Also include:
+- Secure password hashing using Argon2 or bcrypt.
+- Server-side validation.
+- Email verification flow if a suitable email provider is configured.
+- Password-reset flow using expiring, single-use tokens.
+- Optional Google sign-in if it can be properly configured.
+- Logout.
+- Session expiration and refresh handling where applicable.
+- Protected application routes.
+- Rate limiting and protection against brute-force attempts.
+- Secure cookie settings when using cookie-based sessions.
+- CSRF protection where applicable.
+- No passwords stored in plaintext.
+- No private API keys in browser bundles or local storage.
+
+Create a visually appealing login/signup background with an original animated market-chart motif or subtle financial-grid illustration. Support both light and dark themes on authentication pages. Keep the background animation lightweight and accessible.
+
+After successful signup, create the user record in MongoDB and initialize the user's profile and paper-trading account.
+
+Never implement fake authentication that only changes the UI without validating credentials on the server.
+
+# 5. MAIN APPLICATION LAYOUT
+
+After login, display a professional trading terminal.
+
+Desktop:
+- Left sidebar navigation.
+- Top market overview bar.
+- Search and symbol lookup.
+- Main content area.
+- Optional collapsible watchlist panel.
+- Responsive order-entry panel.
+
+Mobile:
+- Compact header.
+- Bottom navigation or accessible collapsible navigation.
+- Responsive charts and tables.
+- Touch-friendly order controls.
+- No horizontal overflow.
+
+Navigation items:
+1. Overview
+2. Markets
+3. Watchlists
+4. Stock Explorer
+5. AI Research
+6. Price Alerts
+7. Paper Trading
+8. Orders
+9. Holdings
+10. Positions
+11. Portfolio Analytics
+12. Trading Journal
+13. News
+14. Notifications
+15. Settings
+16. Profile
+
+Each route must render its own working page. Do not make every menu item open the same placeholder screen.
+
+# 6. MARKET OVERVIEW DASHBOARD
+
+Display:
+- Supported indices, such as NIFTY 50, NIFTY BANK, SENSEX, and other available indices.
+- Current price or last available price.
+- Absolute and percentage change.
+- Session high and low where supplied.
+- Open, previous close, volume, and timestamp where supported.
+- Market status: open, closed, or unavailable.
+- Top gainers and losers when reliable data is available.
+- Most active stocks when supported.
+- User's portfolio value.
+- Day's paper-trading P&L.
+- Watchlist summary.
+- Recent orders.
+- Triggered alerts.
+- Recent AI research summaries.
+
+Clearly identify the market-data source, its update time, and whether it is real-time, delayed, historical, or simulated.
+
+Never fabricate an exchange's market-open status. Use an appropriate market calendar and timezone, or label the status unavailable if it cannot be determined.
+
+Use a configurable refresh strategy and caching to avoid excessive API calls.
+
+# 7. STOCK EXPLORER — MANY COMPANIES
+
+Build a searchable, paginated stock explorer covering as many companies as the connected data provider supports.
+
+Prioritize Indian NSE/BSE-listed equities. Add other markets only if the provider supports them and the applicable data license permits their use.
+
+Include recognizable examples where supported, such as:
+- Reliance Industries
+- HDFC Bank
+- ICICI Bank
+- Infosys
+- Tata Consultancy Services
+- Larsen & Toubro
+- Bharti Airtel
+- ITC
+- State Bank of India
+- Axis Bank
+- Kotak Mahindra Bank
+- Tata Motors
+- Mahindra & Mahindra
+- Wipro
+- HCLTech
+- Maruti Suzuki
+- Sun Pharmaceutical
+- Titan Company
+- NTPC
+- Power Grid
+- Adani Ports
+- Asian Paints
+- Bajaj Finance
+- UltraTech Cement
+- Hindustan Unilever
+
+These are example symbols, not a guarantee that a particular provider supports every security.
+
+For each supported company, show:
+- Company name.
+- Correct exchange and symbol.
+- Current or last available price.
+- Absolute and percentage change.
+- Volume when available.
+- Day high/low when available.
+- Historical performance.
+- Market capitalization and valuation metrics only if the provider supplies reliable data.
+- Sector and company description when available.
+- Favorite/watchlist action.
+- Open chart.
+- AI analysis.
+- Create price alert.
+- Add to paper-trading order ticket.
+
+Provide search by company name, symbol, and supported exchange. Add filters for sector, price movement, price range, and market capitalization where those fields are available.
+
+Do not generate fake symbols or fill missing company data with invented values.
+
+# 8. REAL-TIME MARKET DATA ARCHITECTURE
+
+Build a provider-independent market-data service.
+
+Create a clear interface with operations such as:
+- Search instruments.
+- Fetch quotes.
+- Fetch historical candles.
+- Fetch market indices.
+- Fetch company information.
+- Subscribe to supported live updates.
+- Fetch supported market news.
+
+Implement the provider adapter on the server side. Use a legitimate provider whose API permits the intended use and display. One possible integration to investigate is a licensed market-data or broker API such as Kite Connect, subject to its current terms, credentials, subscription, and permitted application usage.
+
+Also allow configuration for a suitable alternative provider.
+
+Requirements:
+- Keep API keys server-side.
+- Normalize provider responses into a common schema.
+- Handle rate limits, timeouts, network failures, missing data, and market holidays.
+- Cache quotes and historical responses appropriately.
+- Prevent duplicate polling and redundant requests.
+- Reconnect WebSocket subscriptions safely.
+- Display the last successful update timestamp.
+- Provide a clear stale-data indicator.
+- Never silently substitute simulated prices for failed real-data requests.
+- Do not scrape restricted websites or bypass authentication or licensing restrictions.
+
+If the provider supports genuine real-time streaming, use its authorized streaming interface. If only delayed or periodic data is available, clearly describe the data as delayed or periodic.
+
+If no API credentials are configured, enable a dedicated Demo Data Mode with a persistent visible banner. Simulated prices must be generated by a controlled demo engine, not presented as real exchange prices.
+
+Create a Data Sources settings section showing:
+- Selected provider.
+- Connection status.
+- Data mode.
+- Last successful update.
+- Missing configuration.
+- A clear setup guide.
+
+# 9. PROFESSIONAL STOCK CHARTS
+
+Implement an interactive stock-detail page with:
+- Candlestick chart.
+- Line chart.
+- Volume bars.
+- Crosshair and hover tooltips.
+- Historical ranges supported by the data provider.
+- Intraday intervals and daily/weekly/monthly intervals where available.
+- OHLC information.
+- Moving averages.
+- EMA.
+- RSI.
+- MACD.
+- Bollinger Bands.
+- Support and resistance estimates with explanatory caveats.
+- Drawing tools if feasible.
+- Chart fullscreen mode.
+- Responsive controls.
+
+Use genuine historical candle data from the configured source. Demo charts must be clearly labelled.
+
+Technical indicators must be computed correctly from the available data. Never draw random candles on a real-data chart.
+
+# 10. WATCHLISTS AND PRICE ALERTS
+
+Users can:
+- Create multiple watchlists.
+- Rename and delete watchlists.
+- Add and remove instruments.
+- Reorder items.
+- View current prices and changes.
+- Save watchlists to MongoDB.
+- Use a default watchlist.
+- Create multiple custom watchlists.
+
+Price alerts:
+- Price above a selected threshold.
+- Price below a selected threshold.
+- Percentage movement threshold.
+- Optional supported technical-condition alerts.
+- Active, triggered, paused, and expired states.
+- Trigger timestamp.
+- Alert history.
+- Notification preferences.
+
+Evaluate alerts only against valid incoming data and the correct instrument. Prevent repeated notifications for one threshold crossing unless the user explicitly configures repeat alerts.
+
+Use in-app notifications first. Email or push notifications are optional and require correctly configured services.
+
+# 11. PAPER TRADING AND ORDER MANAGEMENT
+
+Create a functional virtual trading simulator, not a real-money broker.
+
+Every new account receives a configurable demo balance, such as ₹10,00,000, labelled "Virtual Funds".
+
+Order types:
+- Market order.
+- Limit order.
+- Stop-loss order.
+- Stop-limit order, if implemented correctly.
+
+Order fields:
+- Symbol.
+- Exchange.
+- Buy or sell.
+- Quantity.
+- Order type.
+- Limit or trigger price when required.
+- Product type for simulator display.
+- Estimated order value.
+- Estimated charges, if a transparent configurable fee model is implemented.
+- Validation messages.
+
+Implement:
+- Order preview.
+- Insufficient virtual-funds validation.
+- Quantity validation.
+- Market-hours rules for the simulator where appropriate.
+- Pending, executed, rejected, and cancelled states.
+- Order book and order history.
+- Cancel eligible pending orders.
+- Modify eligible pending orders.
+- Holdings and positions.
+- Trade confirmations.
+- Portfolio balance reconciliation.
+- Audit records.
+
+For limit and stop orders, implement a real server-side order evaluation process that uses valid market updates. If no genuine market feed is connected, the simulator must use explicitly labelled demo prices.
+
+Use database transactions or another robust consistency mechanism for changes to cash balance, orders, fills, holdings, and positions. Add idempotency protection so repeated requests do not execute the same order twice.
+
+Do not make a button display "Order executed" unless the backend has actually validated and recorded that simulator order.
+
+Keep all simulated orders separate from any real brokerage account.
+
+Do not implement real-money order execution in this project. Any future brokerage connection must be a separate, explicitly authorized integration with the broker's required authentication, permissions, and compliance controls.
+
+# 12. HOLDINGS AND PORTFOLIO ANALYTICS
+
+Build a portfolio dashboard that calculates values from actual recorded simulator transactions.
+
+Show:
+- Available virtual cash.
+- Invested value.
+- Total portfolio value.
+- Unrealized P&L.
+- Realized P&L.
+- Day P&L where valid price data is available.
+- Return percentage.
+- Holdings by company.
+- Sector allocation where data is available.
+- Asset allocation chart.
+- Portfolio value history.
+- Trade history.
+- Average purchase price.
+- Quantity and current value.
+- Best and worst performers.
+
+Handle multiple buys and sells correctly. Implement a documented average-cost method for the initial version and ensure realized and unrealized P&L calculations use the same consistent accounting rules.
+
+Never calculate portfolio P&L using hardcoded demo totals after the user has started trading.
+
+Add CSV export and a printable portfolio report if feasible.
+
+# 13. GEMINI AI RESEARCH ASSISTANT
+
+Integrate Gemini through a secure server-side API.
+
+Create a conversational research assistant that can answer questions such as:
+- "Explain today's movement in this stock."
+- "Summarize the company's latest available results."
+- "What risks should I research before investing?"
+- "Compare these two companies using available metrics."
+- "Explain this chart's recent movement."
+- "Explain RSI and MACD for this instrument."
+- "Summarize the supplied market news."
+- "Help me understand my portfolio concentration."
+- "What information is missing from this analysis?"
+
+The assistant should have access only to relevant, permitted, available data passed by the backend.
+
+Every analysis should:
+- Identify the company and symbol.
+- State the data timestamp.
+- Identify the data source where possible.
+- Distinguish facts, calculations, interpretations, and forecasts.
+- Explain key positive and negative factors.
+- Describe uncertainty and missing information.
+- Provide links to original sources when available.
+- Avoid inventing financial statements, news, analyst ratings, or market data.
+
+If a user asks a question that requires fresh data, retrieve current permitted source data before generating the explanation. Do not let Gemini invent a quote or claim to have checked live data without a successful data retrieval.
+
+Display a visible disclaimer that AI-generated research can be wrong and is not guaranteed financial advice.
+
+# 14. AI STOCK PRICE PREDICTION ENGINE
+
+Build an educational prediction module using real historical data when available.
+
+Supported forecast horizons should be configurable, for example:
+- Next trading session.
+- Five trading sessions.
+- Twenty trading sessions.
+
+Do not promise exact future prices or guaranteed returns.
+
+Prediction pipeline:
+1. Load historical OHLCV data from the configured provider.
+2. Validate timestamps, missing candles, duplicates, and outliers.
+3. Calculate documented features such as returns, rolling volatility, moving averages, RSI, and MACD.
+4. Use a suitable, maintainable forecasting model when enough valid data is available.
+5. Use chronological train/validation/test splits; never randomly shuffle time-series data.
+6. Compare against a simple baseline forecast.
+7. Calculate suitable metrics, such as MAE and directional accuracy, on out-of-sample data.
+8. Record the model version, training window, data timestamp, forecast horizon, and evaluation metrics.
+9. Return a forecast range or scenario distribution where the model supports it.
+10. Explain the most important limitations in plain language.
+
+If the project cannot support a reliable trained forecasting model, implement a transparent baseline first and label it accordingly. Do not pretend a Gemini-generated number is a validated quantitative forecast.
+
+For every prediction, show:
+- Current or last available price.
+- Forecast horizon.
+- Forecast estimate or range, only if actually calculated.
+- Historical-data period.
+- Model name and version.
+- Validation metrics, when available.
+- Confidence or uncertainty range only when statistically justified.
+- Factors that could invalidate the forecast.
+- A prominent "Experimental estimate — not a guarantee" label.
+
+Separate prediction from recommendation. Do not present AI output as a certainty or as a guaranteed buy/sell signal. Never claim a model is accurate without evaluation evidence.
+
+Do not fabricate backtesting results or historical model accuracy.
+
+# 15. COMPANY RESEARCH AND MARKET NEWS
+
+Create a company research page with:
+- Company overview.
+- Sector.
+- Supported financial metrics.
+- Available historical price performance.
+- Key company announcements and news.
+- Source links and publication timestamps.
+- AI-generated summaries based on retrieved articles or documents.
+- A bull/base/bear scenario explanation when supported by evidence.
+- Potential risks and unknowns.
+
+Use a legitimate news or financial-data API with the required permissions. If news access is not configured, display an honest unavailable state and allow the user to configure a provider.
+
+Never fabricate headlines, article links, earnings figures, or citations.
+
+# 16. TRADING JOURNAL AND PERFORMANCE
+
+Allow users to:
+- Add notes to simulator trades.
+- Record their original trade thesis.
+- Set entry and exit reasons.
+- Tag strategies.
+- Record emotions or mistakes optionally.
+- Attach lessons learned.
+- Filter past trades by symbol, date, and strategy.
+
+Show:
+- Total completed simulator trades.
+- Win rate.
+- Average win and loss.
+- Profit factor when mathematically defined.
+- Cumulative P&L.
+- Drawdown where enough history exists.
+- Performance by strategy.
+
+Explain each metric and its limitations. Do not use an empty portfolio to manufacture attractive results.
+
+# 17. NOTIFICATIONS AND USER SETTINGS
+
+Build:
+- In-app notification center.
+- Read/unread states.
+- Alert notifications.
+- Order-status notifications.
+- AI-analysis completion messages where applicable.
+- Profile editing.
+- Avatar upload using a suitable secure storage provider, if configured.
+- Theme and accent preferences.
+- Default watchlist selection.
+- Data-provider status.
+- Privacy controls.
+- Logout and account deletion flow.
+
+Validate all user-editable fields on the server. Restrict uploads by type and size if file uploads are implemented.
+
+# 18. MONGODB ATLAS DATABASE
+
+Use MongoDB Atlas as the persistent database. Do not replace it with browser localStorage, an in-memory array, or Firestore.
+
+Use Mongoose models and schema validation.
+
+Create collections or equivalent models for:
+
+User:
+- name
+- email
+- passwordHash
+- optional phone
+- verification status
+- role
+- preferences
+- createdAt
+- updatedAt
+
+Session or RefreshToken:
+- userId
+- securely stored token hash where applicable
+- expiry
+- revocation status
+
+Watchlist:
+- userId
+- name
+- ordered instrument references
+- timestamps
+
+PriceAlert:
+- userId
+- instrument
+- condition
+- threshold
+- status
+- last evaluated value
+- triggeredAt
+
+PaperAccount:
+- userId
+- initial virtual cash
+- available cash
+- reserved cash if required
+- currency
+- timestamps
+
+Order:
+- userId
+- paperAccountId
+- instrument
+- side
+- order type
+- quantity
+- limit/trigger prices where relevant
+- status
+- idempotency key
+- timestamps
+
+TradeFill:
+- orderId
+- userId
+- instrument
+- side
+- quantity
+- fill price
+- charges if applicable
+- timestamp
+
+Holding or Position:
+- userId
+- instrument
+- quantity
+- average cost
+- realized P&L
+- other fields required by the chosen accounting method
+
+PortfolioSnapshot:
+- userId
+- timestamp
+- cash
+- holdings value
+- total value
+
+AIResearch:
+- userId
+- instrument
+- question
+- analysis
+- data timestamp
+- source references
+- model metadata
+
+Prediction:
+- instrument
+- forecast horizon
+- generated forecast
+- model version
+- input data window
+- evaluation metadata
+- createdAt
+
+TradingJournal:
+- userId
+- related trade
+- notes
+- strategy tags
+- timestamps
+
+Notification:
+- userId
+- type
+- title
+- message
+- read status
+- createdAt
+
+AuditLog:
+- userId
+- action
+- entity type
+- entity ID
+- safe metadata
+- timestamp
+
+Add appropriate indexes, uniqueness constraints, pagination, retention policies where needed, and database migrations or seed scripts.
+
+Use transactions for financial consistency when supported by the deployment's MongoDB configuration. If transactions are unavailable, implement and document an alternative consistency strategy rather than silently risking duplicate orders or inconsistent balances.
+
+All user-owned queries must be scoped to the authenticated user. Never trust a userId supplied by the browser to authorize access.
+
+# 19. BACKEND API AND ERROR HANDLING
+
+Create a documented REST API, grouped by:
+- Authentication.
+- Profile and preferences.
+- Instruments and quotes.
+- Historical charts.
+- Watchlists.
+- Alerts.
+- Paper accounts.
+- Orders.
+- Holdings and positions.
+- Portfolio analytics.
+- AI research.
+- Predictions.
+- News.
+- Notifications.
+- Trading journal.
+- Health and data-provider status.
+
+Use consistent response shapes, proper HTTP status codes, schema validation, authentication middleware, and centralized error handling.
+
+Implement:
+- Pagination.
+- Input validation.
+- Request rate limits.
+- API timeouts.
+- Safe logging.
+- Provider-error handling.
+- Idempotent order submission.
+- Database connection management.
+- Health-check endpoints.
+- Environment validation at startup.
+
+Do not expose stack traces, database connection strings, password hashes, access tokens, or provider secrets to users.
+
+# 20. ENVIRONMENT VARIABLES AND SECRET MANAGEMENT
+
+Create a complete `.env.example` with placeholders only.
+
+Include the relevant variables:
+- MONGODB_URI
+- SESSION_SECRET or JWT_SECRET, according to the chosen auth implementation
+- GEMINI_API_KEY, if not already configured automatically
+- MARKET_DATA_PROVIDER
+- MARKET_DATA_API_KEY
+- MARKET_DATA_API_SECRET, only if the selected provider requires it
+- MARKET_DATA_BASE_URL, if configurable
+- NEWS_API_KEY, if a news provider is used
+- APP_URL
+- NODE_ENV
+
+Do not use fake production credentials. Never commit a real `.env` file.
+
+For Google AI Studio:
+- Store credentials in the server-side Secrets settings.
+- Read them through the server runtime's environment variables.
+- Reuse AI Studio's automatically configured Gemini key if available.
+- Do not print secret values in logs or debugging output.
+
+For MongoDB Atlas:
+- Explain how to create a cluster.
+- Create a database user with a strong password.
+- Configure network access securely.
+- Copy the application connection string into the server-side MONGODB_URI secret.
+- URL-encode special characters in the database password where required.
+- Connect using a reusable connection helper.
+- Add connection failure handling.
+- Never expose MONGODB_URI to frontend code.
+
+# 21. DEMO MODE AND FIRST-RUN EXPERIENCE
+
+The app must remain testable before external market-data credentials are configured.
+
+Implement:
+- A clearly labelled demo market-data provider.
+- Seeded sample instruments and historical candles.
+- A visible "DEMO DATA — NOT LIVE EXCHANGE PRICES" banner.
+- Demo virtual funds.
+- A first-run onboarding flow.
+- Empty-state guidance.
+- Example watchlists.
+- Example AI analysis generated only from the demo data and clearly labelled as illustrative.
+- A provider-configuration page.
+
+Demo data must never be mixed silently with live data.
+
+When real data is unavailable, show "Data unavailable" or the demo label instead of inventing a real-time price.
+
+# 22. SECURITY AND PRIVACY
+
+Apply:
+- Password hashing.
+- Secure authentication and session handling.
+- Authorization checks on every protected endpoint.
+- Input validation and output sanitization.
+- Rate limiting.
+- Protection against injection attacks.
+- Appropriate CORS configuration.
+- Secure headers.
+- CSRF protection when applicable.
+- Safe error responses.
+- Least-privilege database access.
+- Secret management.
+- File-upload validation if applicable.
+- Account deletion and data-handling controls.
+- Audit logging for important simulator transactions.
+
+Never store payment-card information or real brokerage credentials for this paper-trading project.
+
+# 23. TESTING AND ACCEPTANCE CRITERIA
+
+Write tests for:
+- Signup and login.
+- Duplicate email rejection.
+- Invalid-password rejection.
+- Protected routes.
+- User-data isolation.
+- MongoDB persistence.
+- Watchlist create/edit/delete.
+- Alert conditions.
+- Order validation.
+- Insufficient virtual balance.
+- Limit-order execution conditions.
+- Duplicate order prevention.
+- Buy and sell accounting.
+- Average-cost calculation.
+- Realized and unrealized P&L.
+- Provider failure and stale-data states.
+- AI response validation.
+- Prediction metadata and validation metrics.
+- Theme persistence.
+- Mobile layout and critical navigation.
+
+Verify these user journeys:
+1. A user signs up and logs in.
+2. The user reloads the page and remains authenticated according to the configured session policy.
+3. The user changes the theme and it persists.
+4. The user searches for a company and opens its chart.
+5. The user creates a watchlist and the data persists in MongoDB.
+6. The user creates an alert.
+7. The user submits a valid virtual order and sees its real backend status.
+8. The user cannot execute an order twice using a duplicated request.
+9. The user's cash and holdings update consistently.
+10. The user views accurate simulator P&L based on recorded transactions.
+11. The user requests an AI explanation using available data.
+12. The prediction page explains its data period and evaluation status.
+13. An unconfigured provider produces a clear setup message.
+14. A second user cannot read or change the first user's private data.
+15. The application remains usable on desktop and mobile.
+
+# 24. IMPLEMENTATION WORKFLOW
+
+Build in phases, but continue through all phases instead of stopping after a visual mockup.
+
+Phase 1: Establish the app structure, original branding, design system, routing, and responsive layout.
+
+Phase 2: Implement the Node.js backend, MongoDB connection, models, authentication, and protected routes.
+
+Phase 3: Implement market-data adapters, stock explorer, charts, watchlists, and alerts.
+
+Phase 4: Implement the virtual account, order engine, holdings, positions, and portfolio accounting.
+
+Phase 5: Implement Gemini research, transparent price prediction, company research, and news integration.
+
+Phase 6: Implement settings, theme persistence, notifications, journal, and exports.
+
+Phase 7: Add seed scripts, tests, error states, loading states, documentation, and deployment configuration.
+
+After each phase, run the available build or tests, fix errors, and verify integration with the existing project.
+
+Do not replace working features with mockups during later phases. Preserve existing functionality when making changes.
+
+# 25. FINAL DELIVERY REQUIREMENTS
+
+Deliver:
+- Complete working source code.
+- Organized frontend and backend modules.
+- MongoDB models and indexes.
+- Authentication and authorization.
+- Market-data provider interface and configuration.
+- Functional demo mode.
+- AI research and prediction module.
+- Functional paper-trading engine.
+- Responsive dark/light/system themes.
+- `.env.example`.
+- README with setup instructions.
+- MongoDB Atlas setup instructions.
+- API documentation.
+- Seed/demo-data instructions.
+- Testing instructions.
+- Deployment instructions for the supported AI Studio environment.
+- A list of required external credentials and which features depend on them.
+
+At the end, summarize:
+1. What is fully implemented.
+2. Which external services are connected.
+3. Which API keys are still required.
+4. Whether market data is live, delayed, historical, or simulated.
+5. Which tests were actually run and their results.
+6. Any remaining limitations.
+
+Do not claim a feature is complete unless it has been implemented and verified.
+
+## FINAL NON-NEGOTIABLE RULE
+
+Build TradeNova as a real full-stack application, not just a design concept. Prioritize correct financial calculations, MongoDB persistence, secure authentication, genuine data provenance, and functional interactions over decorative features.
+
+This is a research and paper-trading platform, not a real-money brokerage. Clearly disclose investment risk and the experimental nature of AI predictions. Never promise profits or guaranteed accuracy.

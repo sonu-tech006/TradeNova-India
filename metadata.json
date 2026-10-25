@@ -1,0 +1,8 @@
+{
+  "name": "TradeNova — Indian Stock Terminal & AI Research",
+  "description": "Modern Indian stock market platform featuring 250+ NSE/BSE equities, real-time market data architecture, interactive technical charts, paper trading, and Gemini AI analysis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
